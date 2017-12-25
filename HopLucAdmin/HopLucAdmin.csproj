@@ -149,18 +149,45 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Nguoi_Dung_DNController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Dang_Nhap.cs">
+      <DependentUpon>DBQLGiay.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DBQLGiay.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DBQLGiay.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DBQLGiay.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBQLGiay.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DBQLGiay.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DBQLGiay.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HoaDon.cs">
+      <DependentUpon>DBQLGiay.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KhachHang.cs">
+      <DependentUpon>DBQLGiay.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoaiSP.cs">
+      <DependentUpon>DBQLGiay.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NhanVienBH.cs">
+      <DependentUpon>DBQLGiay.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PhieuNhap.cs">
+      <DependentUpon>DBQLGiay.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SanPham.cs">
+      <DependentUpon>DBQLGiay.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -170,6 +197,7 @@
     <Content Include="Assets\css\custom.css" />
     <Content Include="Assets\css\font-awesome.css" />
     <Content Include="Assets\css\style.css" />
+    <Content Include="Assets\css\dangnhap.css" />
     <Content Include="Assets\font-awesome\fonts\fontawesome-webfontba72.svg" />
     <Content Include="Assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Assets\img\1.png" />
@@ -196,6 +224,12 @@
     <Content Include="Models\DBQLGiay.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DBQLGiay.Context.cs</LastGenOutput>
+      <DependentUpon>DBQLGiay.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\DBQLGiay.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBQLGiay.edmx</DependentUpon>
+      <LastGenOutput>DBQLGiay.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -215,9 +249,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DBQLGiay.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\DBQLGiay.edmx.diagram">
+    <Content Include="Models\DBQLGiay.edmx.diagram">
       <DependentUpon>DBQLGiay.edmx</DependentUpon>
-    </None>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -243,6 +277,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Nguoi_Dung_DN\Dang_Nhap.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
