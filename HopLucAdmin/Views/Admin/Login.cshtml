@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/Content/Login.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="login-page">
+        <div class="form">
+           
+                <h4>Đăng nhập vào hệ thống quả trị</h4>
+                <h4 style="color:red; text-align:center">@ViewBag.Thongbao</h4>
+                @using (Html.BeginForm())
+                {
+                    @Html.ValidationSummary(true)
+                    <div>
+                        <input name="username" type="text" placeholder="Người dùng" class="form-username form-control" id="form-username" />
+                        @ViewData["Loi1"]
+                    </div>
+                    <div>
+                        <input name="password" type="password" placeholder="Mật khẩu" class="form-password form-control" id="form-password" />
+                        @ViewData["Loi2"]
+                    </div>
+                    <button type="submit" class="btn">Đăng nhập</button>
+                }
+          
+        </div>
+    </div>
+    <script src="~/Scripts/Login.js"></script>
+</body>
+</html>
