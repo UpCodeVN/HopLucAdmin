@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data;
 
+
 namespace HopLucAdmin.Controllers
 {
     public class AdminController : Controller
@@ -125,6 +126,7 @@ namespace HopLucAdmin.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
+
         public ActionResult Suasanpham(SanPham sanpham,int id)
         {
            if (ModelState.IsValid)
@@ -134,6 +136,7 @@ namespace HopLucAdmin.Controllers
             }
 
                 return RedirectToAction("Sanpham");
+
         }
         /////////////////////////////////////////////////////// HOA DON //////////////////////////////////////////////
         /////////////////////////////////////////////////////// HOA DON //////////////////////////////////////////////
@@ -141,6 +144,7 @@ namespace HopLucAdmin.Controllers
 
         public ActionResult Hoadon()
         {
+
             return  View(db.HoaDons.ToList());
         }
         [HttpGet]
