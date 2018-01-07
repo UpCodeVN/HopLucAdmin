@@ -40,3 +40,5 @@ D:\CodedotNET\HopLucAdmin\HopLucAdmin\bin\Microsoft.AI.WindowsServer.xml
 D:\CodedotNET\HopLucAdmin\HopLucAdmin\bin\Microsoft.AI.Web.xml
 D:\CodedotNET\HopLucAdmin\HopLucAdmin\obj\Debug\HopLucAdmin.dll
 D:\CodedotNET\HopLucAdmin\HopLucAdmin\obj\Debug\HopLucAdmin.pdb
+D:\CodedotNET\HopLucAdmin\HopLucAdmin\bin\EntityFramework.dll
+D:\CodedotNET\HopLucAdmin\HopLucAdmin\bin\EntityFramework.xml

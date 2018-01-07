@@ -1,0 +1,63 @@
+﻿@model HopLucAdmin.Models.NhanVienBH
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="page-wrapper">
+    <div id="page-inner">
+        <h2>Details</h2>
+
+        <div>
+            <h4>NhanVienBH</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.ID_NV)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ID_NV)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Ten_NV)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Ten_NV)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Dia_Chi_NV)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Dia_Chi_NV)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SDT_NV)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SDT_NV)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email_NV)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Email_NV)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID_NV }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+</div>
+        

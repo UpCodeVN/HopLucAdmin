@@ -1,0 +1,481 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HopLucShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Dang_Nhap">
+          <Key>
+            <PropertyRef Name="id_DangNhap" />
+          </Key>
+          <Property Name="id_DangNhap" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Ten_DN" Type="nchar" MaxLength="17" />
+          <Property Name="Mat_Khau" Type="nchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="HoaDon">
+          <Key>
+            <PropertyRef Name="ID_HD" />
+          </Key>
+          <Property Name="ID_HD" Type="smallint" Nullable="false" />
+          <Property Name="Ngay_Gio" Type="datetime" />
+          <Property Name="Ghi_Chu" Type="nchar" MaxLength="150" />
+          <Property Name="ID_KH" Type="tinyint" />
+          <Property Name="ID_SP" Type="tinyint" />
+          <Property Name="ID_NV" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="ID_KH" />
+          </Key>
+          <Property Name="ID_KH" Type="tinyint" Nullable="false" />
+          <Property Name="Ten_KH" Type="nchar" MaxLength="30" />
+          <Property Name="Dia_Chi" Type="nchar" MaxLength="50" />
+          <Property Name="SDT_KH" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Email_KH" Type="nchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="LoaiSP">
+          <Key>
+            <PropertyRef Name="ID_Loai" />
+          </Key>
+          <Property Name="ID_Loai" Type="tinyint" Nullable="false" />
+          <Property Name="Ten_Loai_SP" Type="nchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="NhanVienBH">
+          <Key>
+            <PropertyRef Name="ID_NV" />
+          </Key>
+          <Property Name="ID_NV" Type="tinyint" Nullable="false" />
+          <Property Name="Ten_NV" Type="nchar" MaxLength="50" />
+          <Property Name="Dia_Chi_NV" Type="nchar" MaxLength="50" />
+          <Property Name="SDT_NV" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Email_NV" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PhieuNhap">
+          <Key>
+            <PropertyRef Name="ID_PN" />
+          </Key>
+          <Property Name="ID_PN" Type="tinyint" Nullable="false" />
+          <Property Name="Ngay_Gio" Type="datetime" />
+          <Property Name="Ghi_Chu" Type="nchar" MaxLength="150" />
+          <Property Name="ID_NV" Type="tinyint" />
+          <Property Name="ID_SP" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="SanPham">
+          <Key>
+            <PropertyRef Name="ID_SP" />
+          </Key>
+          <Property Name="ID_SP" Type="tinyint" Nullable="false" />
+          <Property Name="Ma_SP" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Ten_SP" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mo_Ta" Type="nchar" MaxLength="250" />
+          <Property Name="SL" Type="smallint" Nullable="false" />
+          <Property Name="Gia_Ban" Type="money" Nullable="false" />
+          <Property Name="Gia_Nhap" Type="money" Nullable="false" />
+          <Property Name="ID_Loai_SP" Type="tinyint" />
+          <Property Name="Ton_Kho" Type="smallint" />
+        </EntityType>
+        <Association Name="FK_HoaDon_KhachHang">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="ID_KH" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="ID_KH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoaDon_NhanVienBH">
+          <End Role="NhanVienBH" Type="Self.NhanVienBH" Multiplicity="0..1" />
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVienBH">
+              <PropertyRef Name="ID_NV" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="ID_NV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoaDon_SanPham">
+          <End Role="SanPham" Type="Self.SanPham" Multiplicity="0..1" />
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SanPham">
+              <PropertyRef Name="ID_SP" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="ID_SP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhieuNhap_NhanVienBH">
+          <End Role="NhanVienBH" Type="Self.NhanVienBH" Multiplicity="0..1" />
+          <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVienBH">
+              <PropertyRef Name="ID_NV" />
+            </Principal>
+            <Dependent Role="PhieuNhap">
+              <PropertyRef Name="ID_NV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhieuNhap_SanPham">
+          <End Role="SanPham" Type="Self.SanPham" Multiplicity="0..1" />
+          <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SanPham">
+              <PropertyRef Name="ID_SP" />
+            </Principal>
+            <Dependent Role="PhieuNhap">
+              <PropertyRef Name="ID_SP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SanPham_LoaiSP">
+          <End Role="LoaiSP" Type="Self.LoaiSP" Multiplicity="0..1" />
+          <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiSP">
+              <PropertyRef Name="ID_Loai" />
+            </Principal>
+            <Dependent Role="SanPham">
+              <PropertyRef Name="ID_Loai_SP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HopLucShopModelStoreContainer">
+          <EntitySet Name="Dang_Nhap" EntityType="Self.Dang_Nhap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HoaDon" EntityType="Self.HoaDon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiSP" EntityType="Self.LoaiSP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhanVienBH" EntityType="Self.NhanVienBH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhieuNhap" EntityType="Self.PhieuNhap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_HoaDon_KhachHang" Association="Self.FK_HoaDon_KhachHang">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="HoaDon" EntitySet="HoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoaDon_NhanVienBH" Association="Self.FK_HoaDon_NhanVienBH">
+            <End Role="NhanVienBH" EntitySet="NhanVienBH" />
+            <End Role="HoaDon" EntitySet="HoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoaDon_SanPham" Association="Self.FK_HoaDon_SanPham">
+            <End Role="SanPham" EntitySet="SanPham" />
+            <End Role="HoaDon" EntitySet="HoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhieuNhap_NhanVienBH" Association="Self.FK_PhieuNhap_NhanVienBH">
+            <End Role="NhanVienBH" EntitySet="NhanVienBH" />
+            <End Role="PhieuNhap" EntitySet="PhieuNhap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhieuNhap_SanPham" Association="Self.FK_PhieuNhap_SanPham">
+            <End Role="SanPham" EntitySet="SanPham" />
+            <End Role="PhieuNhap" EntitySet="PhieuNhap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SanPham_LoaiSP" Association="Self.FK_SanPham_LoaiSP">
+            <End Role="LoaiSP" EntitySet="LoaiSP" />
+            <End Role="SanPham" EntitySet="SanPham" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HopLucShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Dang_Nhap">
+          <Key>
+            <PropertyRef Name="id_DangNhap" />
+          </Key>
+          <Property Name="id_DangNhap" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Ten_DN" Type="String" MaxLength="17" FixedLength="true" Unicode="true" />
+          <Property Name="Mat_Khau" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HoaDon">
+          <Key>
+            <PropertyRef Name="ID_HD" />
+          </Key>
+          <Property Name="ID_HD" Type="Int16" Nullable="false" />
+          <Property Name="Ngay_Gio" Type="DateTime" Precision="3" />
+          <Property Name="Ghi_Chu" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="ID_KH" Type="Byte" />
+          <Property Name="ID_SP" Type="Byte" />
+          <Property Name="ID_NV" Type="Byte" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.FK_HoaDon_KhachHang" FromRole="HoaDon" ToRole="KhachHang" />
+          <NavigationProperty Name="NhanVienBH" Relationship="Self.FK_HoaDon_NhanVienBH" FromRole="HoaDon" ToRole="NhanVienBH" />
+          <NavigationProperty Name="SanPham" Relationship="Self.FK_HoaDon_SanPham" FromRole="HoaDon" ToRole="SanPham" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="ID_KH" />
+          </Key>
+          <Property Name="ID_KH" Type="Byte" Nullable="false" />
+          <Property Name="Ten_KH" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Dia_Chi" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="SDT_KH" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Email_KH" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="HoaDon" Relationship="Self.FK_HoaDon_KhachHang" FromRole="KhachHang" ToRole="HoaDon" />
+        </EntityType>
+        <EntityType Name="LoaiSP">
+          <Key>
+            <PropertyRef Name="ID_Loai" />
+          </Key>
+          <Property Name="ID_Loai" Type="Byte" Nullable="false" />
+          <Property Name="Ten_Loai_SP" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="SanPham" Relationship="Self.FK_SanPham_LoaiSP" FromRole="LoaiSP" ToRole="SanPham" />
+        </EntityType>
+        <EntityType Name="NhanVienBH">
+          <Key>
+            <PropertyRef Name="ID_NV" />
+          </Key>
+          <Property Name="ID_NV" Type="Byte" Nullable="false" />
+          <Property Name="Ten_NV" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Dia_Chi_NV" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="SDT_NV" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Email_NV" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="HoaDon" Relationship="Self.FK_HoaDon_NhanVienBH" FromRole="NhanVienBH" ToRole="HoaDon" />
+          <NavigationProperty Name="PhieuNhap" Relationship="Self.FK_PhieuNhap_NhanVienBH" FromRole="NhanVienBH" ToRole="PhieuNhap" />
+        </EntityType>
+        <EntityType Name="PhieuNhap">
+          <Key>
+            <PropertyRef Name="ID_PN" />
+          </Key>
+          <Property Name="ID_PN" Type="Byte" Nullable="false" />
+          <Property Name="Ngay_Gio" Type="DateTime" Precision="3" />
+          <Property Name="Ghi_Chu" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="ID_NV" Type="Byte" />
+          <Property Name="ID_SP" Type="Byte" />
+          <NavigationProperty Name="NhanVienBH" Relationship="Self.FK_PhieuNhap_NhanVienBH" FromRole="PhieuNhap" ToRole="NhanVienBH" />
+          <NavigationProperty Name="SanPham" Relationship="Self.FK_PhieuNhap_SanPham" FromRole="PhieuNhap" ToRole="SanPham" />
+        </EntityType>
+        <EntityType Name="SanPham">
+          <Key>
+            <PropertyRef Name="ID_SP" />
+          </Key>
+          <Property Name="ID_SP" Type="Byte" Nullable="false" />
+          <Property Name="Ma_SP" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Ten_SP" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Mo_Ta" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="SL" Type="Int16" Nullable="false" />
+          <Property Name="Gia_Ban" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Gia_Nhap" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="ID_Loai_SP" Type="Byte" />
+          <Property Name="Ton_Kho" Type="Int16" />
+          <NavigationProperty Name="HoaDon" Relationship="Self.FK_HoaDon_SanPham" FromRole="SanPham" ToRole="HoaDon" />
+          <NavigationProperty Name="LoaiSP" Relationship="Self.FK_SanPham_LoaiSP" FromRole="SanPham" ToRole="LoaiSP" />
+          <NavigationProperty Name="PhieuNhap" Relationship="Self.FK_PhieuNhap_SanPham" FromRole="SanPham" ToRole="PhieuNhap" />
+        </EntityType>
+        <Association Name="FK_HoaDon_KhachHang">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="ID_KH" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="ID_KH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoaDon_NhanVienBH">
+          <End Role="NhanVienBH" Type="Self.NhanVienBH" Multiplicity="0..1" />
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVienBH">
+              <PropertyRef Name="ID_NV" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="ID_NV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoaDon_SanPham">
+          <End Role="SanPham" Type="Self.SanPham" Multiplicity="0..1" />
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SanPham">
+              <PropertyRef Name="ID_SP" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="ID_SP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SanPham_LoaiSP">
+          <End Role="LoaiSP" Type="Self.LoaiSP" Multiplicity="0..1" />
+          <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiSP">
+              <PropertyRef Name="ID_Loai" />
+            </Principal>
+            <Dependent Role="SanPham">
+              <PropertyRef Name="ID_Loai_SP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhieuNhap_NhanVienBH">
+          <End Role="NhanVienBH" Type="Self.NhanVienBH" Multiplicity="0..1" />
+          <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVienBH">
+              <PropertyRef Name="ID_NV" />
+            </Principal>
+            <Dependent Role="PhieuNhap">
+              <PropertyRef Name="ID_NV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhieuNhap_SanPham">
+          <End Role="SanPham" Type="Self.SanPham" Multiplicity="0..1" />
+          <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SanPham">
+              <PropertyRef Name="ID_SP" />
+            </Principal>
+            <Dependent Role="PhieuNhap">
+              <PropertyRef Name="ID_SP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HopLucShopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Dang_Nhap" EntityType="Self.Dang_Nhap" />
+          <EntitySet Name="HoaDon" EntityType="Self.HoaDon" />
+          <EntitySet Name="KhachHang" EntityType="Self.KhachHang" />
+          <EntitySet Name="LoaiSP" EntityType="Self.LoaiSP" />
+          <EntitySet Name="NhanVienBH" EntityType="Self.NhanVienBH" />
+          <EntitySet Name="PhieuNhap" EntityType="Self.PhieuNhap" />
+          <EntitySet Name="SanPham" EntityType="Self.SanPham" />
+          <AssociationSet Name="FK_HoaDon_KhachHang" Association="Self.FK_HoaDon_KhachHang">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="HoaDon" EntitySet="HoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoaDon_NhanVienBH" Association="Self.FK_HoaDon_NhanVienBH">
+            <End Role="NhanVienBH" EntitySet="NhanVienBH" />
+            <End Role="HoaDon" EntitySet="HoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoaDon_SanPham" Association="Self.FK_HoaDon_SanPham">
+            <End Role="SanPham" EntitySet="SanPham" />
+            <End Role="HoaDon" EntitySet="HoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SanPham_LoaiSP" Association="Self.FK_SanPham_LoaiSP">
+            <End Role="LoaiSP" EntitySet="LoaiSP" />
+            <End Role="SanPham" EntitySet="SanPham" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhieuNhap_NhanVienBH" Association="Self.FK_PhieuNhap_NhanVienBH">
+            <End Role="NhanVienBH" EntitySet="NhanVienBH" />
+            <End Role="PhieuNhap" EntitySet="PhieuNhap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhieuNhap_SanPham" Association="Self.FK_PhieuNhap_SanPham">
+            <End Role="SanPham" EntitySet="SanPham" />
+            <End Role="PhieuNhap" EntitySet="PhieuNhap" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HopLucShopModelStoreContainer" CdmEntityContainer="HopLucShopEntities">
+          <EntitySetMapping Name="Dang_Nhap">
+            <EntityTypeMapping TypeName="HopLucShopModel.Dang_Nhap">
+              <MappingFragment StoreEntitySet="Dang_Nhap">
+                <ScalarProperty Name="id_DangNhap" ColumnName="id_DangNhap" />
+                <ScalarProperty Name="Ten_DN" ColumnName="Ten_DN" />
+                <ScalarProperty Name="Mat_Khau" ColumnName="Mat_Khau" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HoaDon">
+            <EntityTypeMapping TypeName="HopLucShopModel.HoaDon">
+              <MappingFragment StoreEntitySet="HoaDon">
+                <ScalarProperty Name="ID_HD" ColumnName="ID_HD" />
+                <ScalarProperty Name="Ngay_Gio" ColumnName="Ngay_Gio" />
+                <ScalarProperty Name="Ghi_Chu" ColumnName="Ghi_Chu" />
+                <ScalarProperty Name="ID_KH" ColumnName="ID_KH" />
+                <ScalarProperty Name="ID_SP" ColumnName="ID_SP" />
+                <ScalarProperty Name="ID_NV" ColumnName="ID_NV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhachHang">
+            <EntityTypeMapping TypeName="HopLucShopModel.KhachHang">
+              <MappingFragment StoreEntitySet="KhachHang">
+                <ScalarProperty Name="ID_KH" ColumnName="ID_KH" />
+                <ScalarProperty Name="Ten_KH" ColumnName="Ten_KH" />
+                <ScalarProperty Name="Dia_Chi" ColumnName="Dia_Chi" />
+                <ScalarProperty Name="SDT_KH" ColumnName="SDT_KH" />
+                <ScalarProperty Name="Email_KH" ColumnName="Email_KH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiSP">
+            <EntityTypeMapping TypeName="HopLucShopModel.LoaiSP">
+              <MappingFragment StoreEntitySet="LoaiSP">
+                <ScalarProperty Name="ID_Loai" ColumnName="ID_Loai" />
+                <ScalarProperty Name="Ten_Loai_SP" ColumnName="Ten_Loai_SP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhanVienBH">
+            <EntityTypeMapping TypeName="HopLucShopModel.NhanVienBH">
+              <MappingFragment StoreEntitySet="NhanVienBH">
+                <ScalarProperty Name="ID_NV" ColumnName="ID_NV" />
+                <ScalarProperty Name="Ten_NV" ColumnName="Ten_NV" />
+                <ScalarProperty Name="Dia_Chi_NV" ColumnName="Dia_Chi_NV" />
+                <ScalarProperty Name="SDT_NV" ColumnName="SDT_NV" />
+                <ScalarProperty Name="Email_NV" ColumnName="Email_NV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhieuNhap">
+            <EntityTypeMapping TypeName="HopLucShopModel.PhieuNhap">
+              <MappingFragment StoreEntitySet="PhieuNhap">
+                <ScalarProperty Name="ID_PN" ColumnName="ID_PN" />
+                <ScalarProperty Name="Ngay_Gio" ColumnName="Ngay_Gio" />
+                <ScalarProperty Name="Ghi_Chu" ColumnName="Ghi_Chu" />
+                <ScalarProperty Name="ID_NV" ColumnName="ID_NV" />
+                <ScalarProperty Name="ID_SP" ColumnName="ID_SP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SanPham">
+            <EntityTypeMapping TypeName="HopLucShopModel.SanPham">
+              <MappingFragment StoreEntitySet="SanPham">
+                <ScalarProperty Name="ID_SP" ColumnName="ID_SP" />
+                <ScalarProperty Name="Ma_SP" ColumnName="Ma_SP" />
+                <ScalarProperty Name="Ten_SP" ColumnName="Ten_SP" />
+                <ScalarProperty Name="Mo_Ta" ColumnName="Mo_Ta" />
+                <ScalarProperty Name="SL" ColumnName="SL" />
+                <ScalarProperty Name="Gia_Ban" ColumnName="Gia_Ban" />
+                <ScalarProperty Name="Gia_Nhap" ColumnName="Gia_Nhap" />
+                <ScalarProperty Name="ID_Loai_SP" ColumnName="ID_Loai_SP" />
+                <ScalarProperty Name="Ton_Kho" ColumnName="Ton_Kho" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
