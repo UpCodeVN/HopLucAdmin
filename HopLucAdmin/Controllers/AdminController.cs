@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data;
+
 
 namespace HopLucAdmin.Controllers
 {
@@ -124,15 +126,17 @@ namespace HopLucAdmin.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Suasanpham(SanPham sanpham,HttpPostedFileBase fileUpload)
+
+        public ActionResult Suasanpham(SanPham sanpham,int id)
         {
-            if (ModelState.IsValid)
+           if (ModelState.IsValid)
             {
-                //Luu
                 UpdateModel(sanpham);
                 db.SubmitChanges();
             }
-            return RedirectToAction("Sanpham");
+
+                return RedirectToAction("Sanpham");
+
         }
         /////////////////////////////////////////////////////// HOA DON //////////////////////////////////////////////
         /////////////////////////////////////////////////////// HOA DON //////////////////////////////////////////////
@@ -140,7 +144,106 @@ namespace HopLucAdmin.Controllers
 
         public ActionResult Hoadon()
         {
-            return View(db.HoaDons.ToList());
+
+            return  View(db.HoaDons.ToList());
+        }
+        [HttpGet]
+        public ActionResult Themmoihoadon()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Themmoihoadon(HoaDon hoadon)
+        {
+            if (ModelState.IsValid)
+            {
+                db.HoaDons.InsertOnSubmit(hoadon);
+                db.SubmitChanges();
+            }
+            return RedirectToAction("Hoadon");
+        }
+        public ActionResult Chitiethoadon(int id)
+        {
+            HoaDon hoadon = db.HoaDons.SingleOrDefault(n => n.ID_HD == id);
+            ViewBag.ID_HD = hoadon.ID_HD;
+            if (hoadon == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(hoadon);
+        }
+        [HttpGet]
+        public ActionResult Xoahoadon(int id)
+        {
+            HoaDon hoadon = db.HoaDons.SingleOrDefault(n => n.ID_HD == id);
+            ViewBag.ID_HD = hoadon.ID_HD;
+            if (hoadon == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(hoadon);
+        }
+        [HttpPost, ActionName("Xoahoadon")]
+        public ActionResult Xacnhanxoahoadon(int id)
+        {
+            HoaDon hoadon = db.HoaDons.SingleOrDefault(n => n.ID_HD == id);
+            ViewBag.ID_HD = hoadon.ID_HD;
+            if (hoadon == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            db.HoaDons.DeleteOnSubmit(hoadon);
+            db.SubmitChanges();
+            return RedirectToAction("Hoadon");
+        }
+        [HttpGet]
+        public ActionResult Suahoadon(int id)
+        {
+            HoaDon hoadon = db.HoaDons.SingleOrDefault(n => n.ID_HD == id);
+            if (hoadon==null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(hoadon);
+        }
+        [HttpPost, ActionName("Suahoadon")]
+        [ValidateInput(false)]
+        public ActionResult Suahoadon(HoaDon hoadon)
+        {
+            if (ModelState.IsValid)
+            {
+                UpdateModel(hoadon);
+                db.SubmitChanges();
+            }
+            return RedirectToAction("Hoadon");
+        }
+        /////////////////////////////////////////////////////// KHÁCH HÀNG //////////////////////////////////////////////
+        /////////////////////////////////////////////////////// KHÁCH HÀNG //////////////////////////////////////////////
+        /////////////////////////////////////////////////////// KHÁCH HÀNG //////////////////////////////////////////////
+
+        public ActionResult Khachhang()
+        {
+            return View(db.KhachHangs.ToList());
+        }
+        [HttpGet]
+        public ActionResult Themkhachhang()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Themkhachhang(KhachHang khachhang)
+        {
+            if (ModelState.IsValid)
+            {
+                db.KhachHangs.InsertOnSubmit(khachhang);
+                db.SubmitChanges();
+            }
+            return RedirectToAction("Khachhang");
         }
     }
 }
