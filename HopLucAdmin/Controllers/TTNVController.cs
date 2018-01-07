@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HopLucAdmin.Models;
+using System.Data;
 
 namespace HopLucAdmin.Controllers
 {
@@ -22,7 +23,11 @@ namespace HopLucAdmin.Controllers
         // GET: TTNV/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            using (HopLucShopEntities db = new HopLucShopEntities())
+            {
+                return View(db.NhanVienBH.SingleOrDefault(x => x.ID_NV == id));
+            }
+                
         }
 
         // GET: TTNV/Create
@@ -55,18 +60,25 @@ namespace HopLucAdmin.Controllers
         // GET: TTNV/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            using (HopLucShopEntities db = new HopLucShopEntities())
+            {
+                return View(db.NhanVienBH.SingleOrDefault(x => x.ID_NV == id));
+            }
         }
 
         // POST: TTNV/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, NhanVienBH bH)
         {
             try
             {
                 // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                using (HopLucShopEntities db = new HopLucShopEntities())
+                {
+                    db.Entry(bH).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                    return RedirectToAction("Index");
             }
             catch
             {

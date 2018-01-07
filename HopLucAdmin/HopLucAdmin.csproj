@@ -149,7 +149,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Nguoi_Dung_DNController.cs" />
+    <Compile Include="Controllers\NhanVienBHController.cs" />
+    <Compile Include="Controllers\TTNVController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -277,7 +278,11 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Nguoi_Dung_DN\Dang_Nhap.cshtml" />
+    <Content Include="Views\NhanVienBH\TTNhanVien.cshtml" />
+    <Content Include="Views\TTNV\Index.cshtml" />
+    <Content Include="Views\TTNV\Create.cshtml" />
+    <Content Include="Views\TTNV\Details.cshtml" />
+    <Content Include="Views\TTNV\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
