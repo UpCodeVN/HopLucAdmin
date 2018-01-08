@@ -65,13 +65,17 @@
             </div>
         </nav>
         @*Content index*@
-        @RenderBody()
-        
+        <div id="page-wrapper">
+            <div id="page-inner">
+                @RenderBody()
+            </div>
+        </div>
 
-    </div>
-    @Scripts.Render("~/Assets/js")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+
+</div>
+            @Scripts.Render("~/Assets/js")
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -89,7 +89,10 @@ namespace HopLucAdmin.Controllers
         // GET: TTNV/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            using (HopLucShopEntities db = new HopLucShopEntities())
+            {
+                return View(db.NhanVienBH.SingleOrDefault(x => x.ID_NV == id));
+            }
         }
 
         // POST: TTNV/Delete/5
@@ -99,8 +102,13 @@ namespace HopLucAdmin.Controllers
             try
             {
                 // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                using (HopLucShopEntities db = new HopLucShopEntities())
+                {
+                    NhanVienBH vienBH = db.NhanVienBH.Where(x => x.ID_NV == id).FirstOrDefault();
+                    db.NhanVienBH.Remove(vienBH);
+                    db.SaveChanges();
+                }
+                    return RedirectToAction("Index");
             }
             catch
             {
