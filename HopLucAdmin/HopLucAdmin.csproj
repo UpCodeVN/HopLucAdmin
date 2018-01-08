@@ -283,6 +283,7 @@
     <Content Include="Views\TTNV\Create.cshtml" />
     <Content Include="Views\TTNV\Details.cshtml" />
     <Content Include="Views\TTNV\Edit.cshtml" />
+    <Content Include="Views\TTNV\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
